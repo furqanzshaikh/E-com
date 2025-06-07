@@ -1,0 +1,25 @@
+@import "tailwindcss";
+
+/* styles/globals.css */
+.carousel-container img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 8px;
+}
+/* styles/scrollbar.css or global CSS file */
+.custom-scrollbar::-webkit-scrollbar {
+  height: 2px; /* Reduce height */
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background-color: transparent;
+  width: 10px;
+
+}
+

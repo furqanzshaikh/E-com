@@ -1,0 +1,123 @@
+{
+    "products": [
+      {
+        "id": "G1D001",
+        "img":"/imgs/laptop.jpg",
+        "brand": "ACER",
+        "model": "UT.709SL007",
+        "specs": "ATOM/2/32",
+        "original_price": 185,
+        "current_price": 185,
+        "category": "Laptops"
+      },
+      {
+        "id": "G4D002",
+        "img":"/imgs/laptop.jpg",
+        "brand": "Intel",
+        "model": "17 13th Generation",
+        "specs": "15\" Display",
+        "original_price": 30,
+        "current_price": 30,
+        "category": "Processors"
+      },
+      {
+        "id": "G4D003",
+        "img":"/imgs/laptop.jpg",
+        "brand": "Intel",
+        "model": "13 6th Generation",
+        "specs": "16.5\" Display",
+        "original_price": 30,
+        "current_price": 15,
+        "category": "Processors"
+      },
+      {
+        "id": "G1D004",
+        "img":"/imgs/laptop.jpg",
+        "brand": "DELL",
+        "model": "XPS.8950",
+        "specs": "i7/16/512",
+        "original_price": 999,
+        "current_price": 899,
+        "category": "Laptops"
+      },
+      {
+        "id": "G4D005",
+        "img":"/imgs/laptop.jpg",
+        "brand": "AMD",
+        "model": "Ryzen 7 5800X",
+        "specs": "8-Core Processor",
+        "original_price": 449,
+        "current_price": 399,
+        "category": "Processors"
+      },
+      {
+        "id": "G1D006",
+        "img":"/imgs/laptop.jpg",
+        "brand": "HP",
+        "model": "Pavilion 15",
+        "specs": "i5/8/256",
+        "original_price": 699,
+        "current_price": 649,
+        "category": "Laptops"
+      },
+      {
+        "id": "G4D007",
+        "img":"/imgs/laptop.jpg",
+        "brand": "Apple",
+        "model": "MacBook Air M1",
+        "specs": "13.3\" Retina",
+        "original_price": 999,
+        "current_price": 899,
+        "category": "Laptops"
+      },
+      {
+        "id": "G1D008",
+        "img":"/imgs/laptop.jpg",
+        "brand": "ASUS",
+        "model": "ROG Zephyrus",
+        "specs": "RTX 3060/16/1TB",
+        "original_price": 1499,
+        "current_price": 1399,
+        "category": "Gaming Laptops"
+      },
+      {
+        "id": "G4D009",
+        "img":"/imgs/laptop.jpg",
+        "brand": "Intel",
+        "model": "Core i9-13900K",
+        "specs": "24-Core Processor",
+        "original_price": 589,
+        "current_price": 559,
+        "category": "Processors",
+        "sale":"sale"
+      },
+      {
+        "id": "G1D010",
+        "img":"/imgs/laptop.jpg",
+        "brand": "Lenovo",
+        "model": "ThinkPad X1",
+        "specs": "i7/16/512",
+        "original_price": 1599,
+        "current_price": 1499,
+        "category": "Business Laptops"
+      },{
+        "id": "G1D010",
+        "img":"/imgs/laptop.jpg",
+        "brand": "Lenovo",
+        "model": "ThinkPad X1",
+        "specs": "i7/16/512",
+        "original_price": 1599,
+        "current_price": 1499,
+        "category": "Business Laptops"
+      },{
+        "id": "G1D010",
+        "img":"/imgs/laptop.jpg",
+        "brand": "Lenovo",
+        "model": "ThinkPad X1",
+        "specs": "i7/16/512",
+        "original_price": 1599,
+        "current_price": 1499,
+        "category": "Business Laptops"
+      }
+    ]
+    }

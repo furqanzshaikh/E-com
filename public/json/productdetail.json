@@ -1,0 +1,21 @@
+{
+    "id": "1",
+    "title": "i3 6th Generation 13.5\"",
+    "mainImage": "/imgs/laptop.jpg",
+    "thumbnails": ["/imgs/laptop.jpg", "/imgs/laptop.jpg"],
+    "rating": {
+      "score": 4.5,
+      "reviews": 150
+    },
+    "overview": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam sit amet nulla nec urna hendrerit interdum eu id ligula. Aenean eu scelerisque magna, sed facilisis ante.",
+    "specifications": [
+      "13th Gen Core i3 Processor",
+      "8GB RAM",
+      "2 TB SSD HD",
+      "1080p FHD Display"
+    ],
+    "price": 159.00,
+    "sku": "E002",
+    "categories": ["Gaming", "Work Station", "Business"]
+  }
+  

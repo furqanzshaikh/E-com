@@ -1,0 +1,21 @@
+[
+    {
+      "name": "Davy Renard",
+      "title": "CEO",
+      "image": "/imgs/testomonial2.png",
+      "content": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+    },
+    {
+      "name": "Betty Foster",
+      "title": "Manager",
+      "image": "/imgs/testomonial3.png",
+      "content": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+    },
+    {
+      "name": "Erik Müller",
+      "title": "Founder",
+      "image": "/imgs/testomonial1.png",
+      "content": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+    }
+  ]
+  

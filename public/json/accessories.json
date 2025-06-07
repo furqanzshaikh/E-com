@@ -1,0 +1,34 @@
+{
+    "products": [
+      {
+        "id": "G1D001",
+        "img":"/imgs/laptop.jpg",
+        "brand": "ACER",
+        "model": "UT.709SL007",
+        "specs": "ATOM/2/32",
+        "original_price": 185,
+        "current_price": 185,
+        "category": "Laptops"
+      },
+      {
+        "id": "G4D002",
+        "img":"/imgs/laptop.jpg",
+        "brand": "Intel",
+        "model": "17 13th Generation",
+        "specs": "15\" Display",
+        "original_price": 30,
+        "current_price": 30,
+        "category": "Processors"
+      },
+      {
+        "id": "G4D003",
+        "img":"/imgs/laptop.jpg",
+        "brand": "Intel",
+        "model": "13 6th Generation",
+        "specs": "16.5\" Display",
+        "original_price": 30,
+        "current_price": 15,
+        "category": "Processors"
+      }
+    ]
+}
