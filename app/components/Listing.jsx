@@ -5,6 +5,38 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 
 export default function Listing() {
+
+const handleAddToCart = async (sellingPrice, sku) => {
+  try {
+    const token = localStorage.getItem('token');
+    if (!token) throw new Error('User is not logged in');
+
+    const res = await fetch('http://localhost:3001/products/cart/add', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`, // ✅ Send JWT as Bearer
+      },
+      body: JSON.stringify({
+        sku,
+        sellingPrice,
+        quantity: 1,
+      }),
+    });
+
+    const data = await res.json();
+
+    if (res.ok) {
+      alert('Item added to cart!');
+    } else {
+      alert(`Failed to add item: ${data.message}`);
+    }
+  } catch (err) {
+    console.error('Add to cart error:', err);
+    alert('Something went wrong!');
+  }
+};
+
   const [timeLeft, setTimeLeft] = useState({
     days: 2000,
     hours: 20,
@@ -73,37 +105,47 @@ export default function Listing() {
         </div>
       </div>
 
+
       {/* Product Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-6">
-        {products.map((product, index) => (
-          <Link href={`/product/${product.id}`} key={index}>
-            <div className="bg-white rounded-xl border border-gray-200 shadow-sm">
-              <div className="relative w-full h-60 sm:h-64 md:h-72">
-                {product.images.length > 0 && (
-                  <Image
-                    src={product.url}
-                    alt={product.images[0].alt || product.name}
-                    fill
-                    className="object-cover rounded-t-xl"
-                  />
-                )}
-              </div>
-              <div className="p-4 text-center">
-                <h2 className="text-lg font-semibold mb-1">{product.name}</h2>
-                <p className="text-sm text-gray-600 mb-1">
-                  {product.description}
-                </p>
-                <p className="text-md font-bold text-gray-800 mb-3">
-                  ${product.sellingPrice}
-                </p>
-                <button className="w-full bg-[#EBEBEB] py-2 rounded-2xl text-sm font-medium hover:bg-black hover:text-white transition">
-                  Add To Cart
-                </button>
-              </div>
-            </div>
-          </Link>
-        ))}
+<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-6">
+  {products.slice(0, 9).map((product, index) => (
+  <div key={index} className="bg-white rounded-xl border border-gray-200 shadow-sm">
+    <Link href={`/product/${product.id}`}>
+      <div className="relative w-full h-60 sm:h-64 md:h-72 cursor-pointer">
+        {product.images.length > 0 && (
+          <Image
+            src={product.url}
+            alt={product.images[0].alt || product.name}
+            fill
+            className="object-cover rounded-t-xl"
+          />
+        )}
       </div>
+    </Link>
+    <div className="p-4 text-center">
+      <h2 className="text-lg font-semibold mb-1">{product.name}</h2>
+      <p className="text-md font-bold text-gray-800 mb-3">
+        ₹ {product.sellingPrice < product.actualPrice ? (
+          <>
+            <span className="line-through text-gray-500 mr-2">₹ {product.actualPrice}</span>
+            <span>₹ {product.sellingPrice}</span>
+          </>
+        ) : (
+          <>₹ {product.actualPrice}</>
+        )}
+      </p>
+      <button
+        className="w-full bg-[#EBEBEB] py-2 rounded-2xl text-sm font-medium hover:bg-black hover:text-white transition"
+         onClick={() => handleAddToCart(product.sellingPrice, product.sku)}
+      >
+        Add To Cart
+      </button>
+    </div>
+  </div>
+))}
+
+</div>
+
     </div>
   );
 }

@@ -162,8 +162,8 @@ export default function ProductDetail() {
                   </svg>
                 </div>
                 <div>
-  <span className="text-sm font-semibold text-green-400">Offer Price: ${product.actualPrice}</span>
-  <span className="text-sm text-gray-500 line-through ml-3">Original Price: ${product.sellingPrice}</span>
+  <span className="text-sm font-semibold text-green-400">Offer Price: ₹{product.sellingPrice}</span>
+  <span className="text-sm text-gray-500 line-through ml-3">Original Price: ₹{product.actualPrice}</span>
 </div>
 </li>
             </ul>
@@ -172,7 +172,7 @@ export default function ProductDetail() {
 
             {/* Price and Add To Cart */}
             <div className="mb-6">
-              <h2 className="text-2xl sm:text-3xl font-bold mb-4">${product.sellingPrice}</h2>
+              <h2 className="text-2xl sm:text-3xl font-bold mb-4">₹ {product.sellingPrice}</h2>
               <div className="flex flex-wrap gap-2 items-center">
                 <input
                   type="number"
@@ -196,7 +196,7 @@ export default function ProductDetail() {
             {/* Product Info */}
             <div className="space-y-4 text-sm">
               <div>
-                <span className="font-semibold">SKU:</span> {product.id}
+                <span className="font-semibold">SKU:</span> {product.sku}
               </div>
               <div>
                 <span className="font-semibold">Share this item</span>

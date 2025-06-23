@@ -24,7 +24,7 @@ const Home = () => {
       <Card />
       <BuildPc />
       <Listing />
-      {/* <TimerSection/> */}
+      <TimerSection/>
       <StudentSpecial heading={heading} img={img} text={text} reverse={false} textcolor={false}/>
       <Accessories />
       <Features />

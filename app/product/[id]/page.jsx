@@ -10,6 +10,7 @@ import {
   Megaphone,
   ChevronLeft,
   ChevronRight,
+  CheckCircle,
 } from "lucide-react";
 import ProductDetail from "../../components/ProductDetail";
 
@@ -113,6 +114,20 @@ export default function CombinedProductPage() {
 
   return (
     <>
+     <div className="flex items-center justify-between border border-[#a5c663] bg-[#f6f6f6] px-4 py-3 rounded shadow-sm">
+      {/* Left side: Icon + Message */}
+      <div className="flex items-center gap-2">
+        <CheckCircle className="text-[#7bb13c] w-5 h-5" />
+        <p className="text-sm text-gray-800">
+          <span className="font-medium">“i7 13th Generation 15”</span> has been added to your cart.
+        </p>
+      </div>
+
+      {/* Right side: View Cart Button */}
+      <button className="bg-gray-100 hover:bg-gray-200 text-sm text-gray-700 px-4 py-1.5 rounded-md border border-gray-300 transition">
+       <Link href={'/cart'}> View cart</Link>
+      </button>
+    </div>
       {/* Header */}
       <div className="w-full md:px-4 sm:px-6 ">
         <div
@@ -203,11 +218,7 @@ export default function CombinedProductPage() {
           ))}
         </div>
       </section>
-
-      {/* Feature Cards Carousel */}
-      <section className="w-full bg-[#f5ffed] py-16 px-4 md:px-10 ">
-        {/* Background Hero */}
-        <div className="relative w-full h-[500px] overflow-hidden rounded-3xl my-16 max-w-7xl mx-auto">
+ <div className="relative w-[1000px] h-[500px] overflow-hidden rounded-3xl my-16 max-w-7xl mx-auto">
           <Image
             src="/imgs/Background.jpg"
             alt="Background"
@@ -238,6 +249,10 @@ export default function CombinedProductPage() {
           </div>
         </div>
 
+      {/* Feature Cards Carousel */}
+      <section className="w-full bg-[#f5ffed] py-16 px-4 md:px-10 ">
+        {/* Background Hero */}
+       
         {/* Features */}
         <div className="max-w-7xl mx-auto">
           <h1 className="text-4xl font-bold mb-12 text-center md:text-left">

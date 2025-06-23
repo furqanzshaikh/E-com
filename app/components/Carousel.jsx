@@ -33,9 +33,9 @@ const Carousel = ({ message, btn }) => {
                 alt={`img${slide}`}
                 className="absolute inset-0 w-full h-full object-cover object-left-center"
               />
-              <div className="absolute inset-0 flex items-center justify-center md:justify-end p-6">
-                <div className="text-white max-w-md p-6 rounded-lg text-center md:text-left">
-                  <h2 className="text-3xl sm:text-4xl font-semibold mb-4">
+              <div className="absolute inset-0 flex items-center justify-center md:justify-end ">
+                <div className="text-white max-w-md py-2 rounded-lg text-center md:text-left">
+                  <h2 className="text-2xl md:text-4xl font-semibold mb-2">
                     {message}
                   </h2>
                   <button className="mt-2 px-6 py-2 border border-white text-white bg-transparent rounded-full font-medium hover:bg-white hover:text-black transition duration-300">

@@ -9,11 +9,13 @@ import RecentlyViewed from "../components/RecentlyViewed";
 
 const Shopping = () => {
   const categories = [
-    { src: "/imgs/cat2.png", title: "Iphone" },
-    { src: "/imgs/cat3.png", title: "Mega Offer" },
-    { src: "/imgs/cat4.png", title: "Discount" },
-    { src: "/imgs/cat5.png", title: "New Arrivals" },
-    { src: "/imgs/cat1.png", title: "All" },
+    { name: 'Verified Open Box', image: '/imgs/Categeory1.png' },
+    { name: 'Accessories', image: '/imgs/Categeory2.png' },
+    { name: 'Custom PCs', image: '/imgs/Categeory3.png' },
+    { name: 'Gaming', image: '/imgs/Categeory4.png' },
+    { name: 'Laptops', image: '/imgs/Categeory5.png' },
+    { name: 'Workstations', image: '/imgs/Categeory1.png' },
+    { name: 'Workstations', image: '/imgs/Categeory1.png' },
   ];
 
   const message = "Need Help Choosing? Contact Us for Expert Advice";
@@ -34,43 +36,44 @@ const Shopping = () => {
     setBrands({ ...brands, [brand]: !brands[brand] });
   };
 
-  const handleCategoryChange = (category) => {
-    setSelectedCategory(category);
+  const handleCategoryChange = (categoryName) => {
+    setSelectedCategory(categoryName);
   };
-
- 
 
   return (
     <>
       {/* Category List */}
       <div className="w-full px-4 sm:px-8 md:px-16 py-10">
         <div className="overflow-x-auto custom-scrollbar">
-          <div className="flex gap-6 sm:gap-10 min-w-max justify-start sm:justify-around px-2">
-            {categories.map((category, index) => (
-              <div
-                key={index}
-                className={`flex-shrink-0 w-[120px] sm:w-[140px] flex flex-col items-center text-center ${selectedCategory === category.title ? 'border-2 border-blue-500' : ''}`}
-                onClick={() => handleCategoryChange(category.title)}
-              >
-                <div className="relative w-[120px] h-[120px] sm:w-[140px] sm:h-[140px] rounded-full overflow-hidden mb-2">
-                  <Image
-                    src={category.src}
-                    alt={category.title}
-                    fill
-                    className="object-cover"
-                  />
-                </div>
-                <p className="text-sm sm:text-base font-medium">
-                  {category.title}
-                </p>
-              </div>
-            ))}
-          </div>
+         <div className="flex gap-6 sm:gap-10 min-w-max justify-start sm:justify-around px-2">
+  {categories.map((category, index) => (
+    <div
+      key={index}
+      className={`flex-shrink-0 w-[120px] sm:w-[140px] flex flex-col items-center text-center cursor-pointer ${
+        selectedCategory === category.name ? 'border-2 border-blue-500 rounded-xl' : ''
+      }`}
+      onClick={() => handleCategoryChange(category.name)}
+    >
+      <div className="relative w-[120px] h-[120px] sm:w-[140px] sm:h-[140px] overflow-hidden rounded-xl mb-2">
+        <Image
+          src={category.image}
+          alt={category.name}
+          fill
+          className="object-cover"
+        />
+      </div>
+      <p className="text-sm sm:text-base font-medium">
+        {category.name}
+      </p>
+    </div>
+  ))}
+</div>
+
         </div>
       </div>
 
       {/* Promo Carousel */}
-      <Carousel message={message} btnText={btn} />
+      <Carousel message={message} btn={btn} />
 
       {/* Filter + Listing Section */}
       <div className="px-4 sm:px-8 py-8 flex flex-col md:flex-row gap-6 max-w-7xl mx-auto">
@@ -91,8 +94,6 @@ const Shopping = () => {
               </p>
             </div>
           </div>
-
-        
         </div>
 
         {/* Listing Section */}
