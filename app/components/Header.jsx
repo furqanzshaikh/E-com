@@ -111,7 +111,7 @@ const Header = () => {
         </div>
 
         <div className="flex items-center gap-2">
-          <IoCartOutline className="text-lg" />
+          <Link href={'/cart'}><IoCartOutline className="text-lg" /></Link>
           <span className="text-sm font-medium">₹ 0</span>
         </div>
       </nav>

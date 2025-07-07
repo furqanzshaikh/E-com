@@ -102,28 +102,30 @@ export default function Accessories() {
       </div>
 
       {/* Custom Build Promo Section */}
-      <div
-        className="w-full md:h-screen flex flex-col justify-between py-20 items-center text-center"
-        style={{
-          background: "linear-gradient(116.34deg, #FFEDED 0%, #F3F2FB 100%)",
-        }}
-      >
-        <div className="px-4">
-          <h1 className="text-xl md:text-4xl font-semibold text-black mb-8 leading-normal">
-            Get Exclusive Freebies <br />
-            with Your Custom Build!
-          </h1>
-          <p className="text-sm md:text-lg text-black font-semibold">
-            Build your dream PC and take home a premium Keyboard & Mouse absolutely FREE.
-          </p>
-          <p className="text-sm md:text-lg text-black font-medium">
-            (Limited time offer — while stocks last!)
-          </p>
-        </div>
-        <button className="mt-8 px-12 py-2 border border-black rounded-full text-black hover:bg-black hover:text-white transition">
-          Buy Now
-        </button>
-      </div>
+    <div
+  className="w-full  flex flex-col justify-center items-center text-center px-4"
+  style={{
+    background: "linear-gradient( #FFEDED 0%, #F3F2FB 100%)",
+  }}
+>
+  <div className="max-w-3xl flex items-center justify-between flex-col ">
+   <div className="md:mb-12">
+     <h1 className="text-lg md:text-4xl font-semibold text-black mb-8 leading-normal">
+      Get Exclusive Freebies <br />
+      with Your Custom Build!
+    </h1>
+    <p className="text-xs md:text-lg text-black font-semibold ">
+      Build your dream PC and take home a premium Keyboard & Mouse absolutely FREE.
+    </p>
+    <p className="text-xs md:text-lg text-black font-medium">
+      (Limited time offer — while stocks last!)
+    </p>
+   </div>
+    <button className="mt-8 px-12 py-2 border border-black rounded-full text-black hover:bg-black hover:text-white transition">
+      Buy Now
+    </button>
+  </div>
+</div>
     </>
   );
 }

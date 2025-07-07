@@ -16,26 +16,6 @@ export default function StudentSpecial({ heading, img, text, reverse, textcolor 
       category: "Business Laptops",
     },
     {
-      id: "G1D011",
-      img: "/imgs/laptop.jpg",
-      brand: "Dell",
-      model: "XPS 13",
-      specs: "i5/8/256",
-      original_price: 1399,
-      current_price: 1199,
-      category: "Ultrabooks",
-    },
-    {
-      id: "G1D012",
-      img: "/imgs/laptop.jpg",
-      brand: "HP",
-      model: "Spectre x360",
-      specs: "i7/16/512",
-      original_price: 1699,
-      current_price: 1599,
-      category: "Convertible Laptops",
-    },
-    {
       id: "G1D013",
       img: "/imgs/laptop.jpg",
       brand: "Asus",
@@ -53,7 +33,7 @@ export default function StudentSpecial({ heading, img, text, reverse, textcolor 
   useEffect(() => {
     if (typeof window !== "undefined") {
       const handleResize = () => setWindowWidth(window.innerWidth);
-      handleResize(); // Set initially
+      handleResize(); // Initial size
       window.addEventListener("resize", handleResize);
       return () => window.removeEventListener("resize", handleResize);
     }
@@ -78,38 +58,44 @@ export default function StudentSpecial({ heading, img, text, reverse, textcolor 
       <div className="max-w-7xl mx-auto">
         <h1 className="text-4xl font-semibold mb-10">{heading}</h1>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 grid-flow-dense gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
           {/* Image Section */}
           <div
-            className={`lg:col-span-5 rounded-lg overflow-hidden relative ${
+            className={`lg:col-span-6 rounded-lg overflow-hidden relative ${
               reverse ? "lg:order-2" : "lg:order-1"
             } ${textcolor ? "text-white" : "text-black"}`}
           >
-            <div className="p-6 pb-12 pt-32 flex flex-col h-96 md:h-screen justify-end">
-              <Image
-                src={img}
-                alt="Laptop with mountain view"
-                width={600}
-                height={600}
-                className="absolute bottom-0 left-0 w-full h-full object-cover"
-                
-              />
-              <div className="flex flex-col justify-center items-center z-10">
-                <h2
-                  className="md:text-4xl text-lg font-semibold mb-4 text-center"
-                  dangerouslySetInnerHTML={{ __html: text }}
-                />
-<button
-  className={`bg-transparent border text-lg md:text-xl ${textcolor ? 'text-white' : 'text-black'}  hover:bg-black/10 rounded-full md:px-6 md:py-2 px-4 py-2 flex items-center`}
->                  Find Now <ArrowRight className="ml-2" />
-                </button>
-              </div>
-            </div>
+            <div className="relative p-6 pb-12 pt-32 min-h-[400px] md:min-h-[500px] h-full w-full flex items-end justify-center overflow-hidden rounded-lg">
+ 
+  <Image
+    src={img}
+    alt="Laptop with mountain view"
+    fill
+    className="object-cover object-top z-0"
+    priority
+  />
+
+  {/* Overlay Content */}
+  <div className="relative z-10 text-center max-w-xl px-4">
+    <h2
+      className="md:text-4xl text-lg font-semibold mb-4"
+      dangerouslySetInnerHTML={{ __html: text }}
+    />
+    <button
+      className={`bg-transparent border text-lg md:text-xl ${
+        textcolor ? "text-white" : "text-black"
+      } hover:bg-black/10 rounded-full md:px-6 md:py-2 px-4 py-2 flex items-center mx-auto`}
+    >
+      Find Now <ArrowRight className="ml-2" />
+    </button>
+  </div>
+</div>
+
           </div>
 
           {/* Product Cards Section */}
           <div
-            className={`lg:col-span-7 bg-white rounded-lg p-6 relative ${
+            className={`lg:col-span-6 bg-white rounded-lg p-6 relative ${
               reverse ? "lg:order-1" : "lg:order-2"
             }`}
           >
@@ -129,7 +115,7 @@ export default function StudentSpecial({ heading, img, text, reverse, textcolor 
               </button>
             </div>
 
-            {/* Product Cards - Responsive */}
+            {/* Product Cards */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {laptops
                 .slice(currentIndex, currentIndex + cardsToShow)

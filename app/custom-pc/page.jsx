@@ -134,24 +134,33 @@ const CustomPc = () => {
               {currentStepIndex === 0 ? (
                 <>
                   <h2 className="text-xl font-bold text-white mb-6">CHOOSE PLATFORM</h2>
-                  <div className="flex gap-8 mb-6">
-                    {['Intel', 'AMD'].map((option) => (
-                      <label key={option} className="text-white text-sm flex items-center gap-2">
-                        <input
-                          type="radio"
-                          name="platform"
-                          value={option}
-                          checked={selectedPlatform === option}
-                          onChange={() => {
-                            setSelectedPlatform(option);
-                            setSelectedComponents(prev => ({ ...prev, PLATFORM: option }));
-                            setCurrentStepIndex(1);
-                          }}
-                        />
-                        {option}
-                      </label>
-                    ))}
-                  </div>
+                 <div className="flex flex-col gap-4 items-center">
+  <div className="flex gap-8">
+    {['Intel', 'AMD'].map((option) => (
+      <label key={option} className="text-white text-sm flex items-center gap-2">
+        <input
+          type="radio"
+          name="platform"
+          value={option}
+          checked={selectedPlatform === option}
+          onChange={() => setSelectedPlatform(option)}
+        />
+        {option}
+      </label>
+    ))}
+  </div>
+<button
+  onClick={() => {
+    setSelectedComponents(prev => ({ ...prev, PLATFORM: selectedPlatform }));
+    setCurrentStepIndex(1);
+    setActiveTab('Components'); // ✅ change tab here
+  }}
+  className="mt-2 px-6 py-2 rounded font-semibold bg-blue-700 text-white hover:bg-blue-800 transition"
+>
+  Continue
+</button>
+</div>
+
                 </>
               ) : currentStepIndex >= components.length ? (
                 <>
@@ -273,7 +282,8 @@ const CustomPc = () => {
               <Link href={card.link}>
                 <div className="relative group cursor-pointer h-full flex flex-col">
                   <div className="relative overflow-hidden rounded-xl shadow-md h-[220px]">
-                    <div className="absolute bottom-[-10px] right-[-10px] w-[45px] h-[45px] bg-white rounded-full z-10 flex items-center justify-center shadow-md">
+                                        <div className="absolute bottom-[-5px] right-[-5px] w-[45px] h-[45px] bg-white rounded-full z-10 flex items-center justify-center ">
+
                       <ArrowUpRight className="w-4 h-4 text-black" />
                     </div>
                     <Image

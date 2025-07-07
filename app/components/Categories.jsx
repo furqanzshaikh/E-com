@@ -1,21 +1,22 @@
 'use client';
 
 import Image from 'next/image';
+import Link from 'next/link';
 import React, { useRef } from 'react';
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 
 const Categories = () => {
   const scrollRef = useRef(null);
 
-  const categories = [
-    { name: 'Verified Open Box', image: '/imgs/Categeory1.png' },
-    { name: 'Accessories', image: '/imgs/Categeory2.png' },
-    { name: 'Custom PCs', image: '/imgs/Categeory3.png' },
-    { name: 'Gaming', image: '/imgs/Categeory4.png' },
-    { name: 'Laptops', image: '/imgs/Categeory5.png' },
-    { name: 'Workstations', image: '/imgs/Categeory1.png' },
-    { name: 'Workstations', image: '/imgs/Categeory1.png' },
-  ];
+const categories = [
+  { name: 'Verified Open Box', image: '/imgs/Categeory1.png', href: '/laptops?type=openbox' },
+  { name: 'Accessories', image: '/imgs/Categeory2.png', href: '/accessories' },
+  { name: 'Custom PCs', image: '/imgs/Categeory3.png', href: '/custom-pc' },
+  { name: 'Gaming', image: '/imgs/Categeory4.png', href: '/laptops?type=gaming' },
+  { name: 'Laptops', image: '/imgs/Categeory5.png', href: '/laptops' },
+  { name: 'Workstations', image: '/imgs/Categeory1.png', href: '/laptops?type=workstations' },
+  { name: 'Desktops', image: '/imgs/Categeory2.png', href: '/laptops?type=desktop' },
+];
 
   const scroll = (direction) => {
     const scrollAmount = 220;
@@ -68,8 +69,9 @@ const Categories = () => {
           className="flex gap-6 sm:gap-10 overflow-x-auto scroll-smooth pb-2 custom-scrollbar"
         >
           {categories.map((category, index) => (
-            <div
+            <Link
               key={index}
+              href={category.href || '#'}
               className="flex-shrink-0 w-[140px] sm:w-[160px] md:w-[180px] flex flex-col items-center"
             >
               <div className="relative w-[140px] h-[140px] sm:w-[160px] sm:h-[160px] md:w-[180px] md:h-[180px] mb-3 rounded-lg overflow-hidden">
@@ -83,7 +85,7 @@ const Categories = () => {
               <p className="text-center text-sm sm:text-base font-medium">
                 {category.name}
               </p>
-            </div>
+            </Link>
           ))}
         </div>
       </div>

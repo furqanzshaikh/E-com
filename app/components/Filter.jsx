@@ -1,15 +1,16 @@
 "use client";
 
-import * as React from "react";
+import React, { useEffect, useState } from "react";
 import * as SliderPrimitive from "@radix-ui/react-slider";
 import { ChevronDown } from "lucide-react";
+import { useRouter, usePathname, useSearchParams } from "next/navigation";
 
-// Utility function for conditional classNames
+// Utility
 function cn(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-// Custom Slider component using Radix UI
+// Slider
 const Slider = React.forwardRef(({ className, ...props }, ref) => (
   <SliderPrimitive.Root
     ref={ref}
@@ -29,47 +30,70 @@ const Slider = React.forwardRef(({ className, ...props }, ref) => (
 ));
 Slider.displayName = "Slider";
 
-// Main Filter Component
 export default function Filter() {
-  const [priceRange, setPriceRange] = React.useState([20000, 45000]);
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+
   const maxPrice = 70000;
 
-  const [categories, setCategories] = React.useState({
-    gamingMachines: true,
+  const [priceRange, setPriceRange] = useState([20000, 45000]);
+
+  const allCategories = {
+    gaming: false,
     businessNotebooks: false,
     studentEssentials: false,
     workstations: false,
-    accessories: true,
     customBuildPC: false,
-  });
+    openbox: false,
+    desktop:false
+  };
 
-  const [brands, setBrands] = React.useState({
+  const allBrands = {
     apple: false,
     hp: false,
     lenovo: false,
     acer: false,
     dell: false,
     asus: false,
-  });
+  };
 
-  const [moreFilters, setMoreFilters] = React.useState({
+  const allMoreFilters = {
     ram: false,
     storage: false,
     graphicsCard: false,
     processor: false,
     batteryLife: false,
     displaySize: false,
-  });
+  };
 
-  const [expandedSections, setExpandedSections] = React.useState({
+  const [categories, setCategories] = useState(allCategories);
+  const [brands, setBrands] = useState(allBrands);
+  const [moreFilters, setMoreFilters] = useState(allMoreFilters);
+
+  const [expandedSections, setExpandedSections] = useState({
     categories: true,
-    price: false,
-    brands: false,
+    price: true,
+    brands: true,
     moreFilters: false,
   });
 
+  const updateQueryArray = (param, selectedItems) => {
+    const params = new URLSearchParams(searchParams.toString());
+    params.delete(param);
+    selectedItems.forEach((item) => params.append(param, item));
+    router.push(`${pathname}?${params.toString()}`);
+  };
+
+  const getSelectedKeys = (obj) =>
+    Object.keys(obj).filter((key) => obj[key]);
+
   const handleSliderChange = (value) => {
     setPriceRange(value);
+    const params = new URLSearchParams(searchParams.toString());
+    params.set("min", value[0]);
+    params.set("max", value[1]);
+    router.push(`${pathname}?${params.toString()}`);
   };
 
   const toggleSection = (section) => {
@@ -79,33 +103,56 @@ export default function Filter() {
     }));
   };
 
-  const handleCategoryChange = (category) => {
-    setCategories((prev) => ({
-      ...prev,
-      [category]: !prev[category],
-    }));
-  };
-
-  const handleBrandChange = (brand) => {
-    setBrands((prev) => ({
-      ...prev,
-      [brand]: !prev[brand],
-    }));
-  };
-
-  const handleMoreFilterChange = (filter) => {
-    setMoreFilters((prev) => ({
-      ...prev,
-      [filter]: !prev[filter],
-    }));
+  const handleGenericChange = (key, state, setState, paramName) => {
+    const updated = { ...state, [key]: !state[key] };
+    setState(updated);
+    updateQueryArray(paramName, getSelectedKeys(updated));
   };
 
   const handleClear = () => {
     setPriceRange([0, maxPrice]);
-    setCategories(Object.fromEntries(Object.keys(categories).map((key) => [key, false])));
-    setBrands(Object.fromEntries(Object.keys(brands).map((key) => [key, false])));
-    setMoreFilters(Object.fromEntries(Object.keys(moreFilters).map((key) => [key, false])));
+    setCategories(allCategories);
+    setBrands(allBrands);
+    setMoreFilters(allMoreFilters);
+    router.push(pathname);
   };
+
+  // Sync state with URL
+  useEffect(() => {
+    const typeParams = searchParams.getAll("type");
+    const brandParams = searchParams.getAll("brand");
+    const moreParams = searchParams.getAll("more");
+    const min = parseInt(searchParams.get("min") || "0");
+    const max = parseInt(searchParams.get("max") || `${maxPrice}`);
+
+    setCategories((prev) => {
+      const newState = { ...allCategories };
+      typeParams.forEach((t) => {
+        if (newState[t] !== undefined) newState[t] = true;
+      });
+      return newState;
+    });
+
+    setBrands((prev) => {
+      const newState = { ...allBrands };
+      brandParams.forEach((b) => {
+        if (newState[b] !== undefined) newState[b] = true;
+      });
+      return newState;
+    });
+
+    setMoreFilters((prev) => {
+      const newState = { ...allMoreFilters };
+      moreParams.forEach((m) => {
+        if (newState[m] !== undefined) newState[m] = true;
+      });
+      return newState;
+    });
+
+    if (!isNaN(min) && !isNaN(max)) {
+      setPriceRange([min, max]);
+    }
+  }, [searchParams]);
 
   return (
     <div className="w-full max-w-xs py-3 bg-white rounded-lg shadow-sm px-4">
@@ -116,40 +163,45 @@ export default function Filter() {
         </button>
       </div>
 
-      {/* Categories Section */}
+      {/* Section Template */}
+      {[
+        { label: "Categories", key: "categories", data: categories, setter: setCategories, param: "type" },
+        { label: "Brands", key: "brands", data: brands, setter: setBrands, param: "brand" },
+        { label: "More Filters", key: "moreFilters", data: moreFilters, setter: setMoreFilters, param: "more" },
+      ].map(({ label, key, data, setter, param }) => (
+        <div className="border-t border-gray-200 py-4" key={key}>
+          <div className="flex items-center justify-between cursor-pointer" onClick={() => toggleSection(key)}>
+            <h3 className="text-lg font-medium">{label}</h3>
+            <ChevronDown
+              className={`h-5 w-5 text-gray-500 transform transition-transform ${
+                expandedSections[key] ? "rotate-180" : ""
+              }`}
+            />
+          </div>
+          {expandedSections[key] && (
+            <div className="mt-4 space-y-2">
+              {Object.entries(data).map(([name, checked]) => (
+                <label key={name} className="flex items-center">
+                  <input
+                    type="checkbox"
+                    className="h-4 w-4 rounded border-gray-300 text-blue-600"
+                    checked={checked}
+                    onChange={() => handleGenericChange(name, data, setter, param)}
+                  />
+                  <span className="ml-2 capitalize">{name.replace(/([A-Z])/g, " $1")}</span>
+                </label>
+              ))}
+            </div>
+          )}
+        </div>
+      ))}
+
+      {/* Price Slider */}
       <div className="border-t border-gray-200 py-4">
         <div
-          className="flex items-center justify-between mb-4 cursor-pointer"
-          onClick={() => toggleSection("categories")}
+          className="flex items-center justify-between cursor-pointer"
+          onClick={() => toggleSection("price")}
         >
-          <h3 className="text-lg font-medium">Categories</h3>
-          <ChevronDown
-            className={`h-5 w-5 text-gray-500 transform transition-transform ${
-              expandedSections.categories ? "rotate-180" : ""
-            }`}
-          />
-        </div>
-        {expandedSections.categories && (
-          <div className="space-y-2">
-            {Object.entries(categories).map(([key, value]) => (
-              <label key={key} className="flex items-center">
-                <input
-                  type="checkbox"
-                  className="h-4 w-4 rounded border-gray-300 text-blue-600"
-                  checked={value}
-                  onChange={() => handleCategoryChange(key)}
-                />
-                <span className="ml-2 capitalize">{key.replace(/([A-Z])/g, " $1")} <span className="text-gray-500">(100+)</span></span>
-              </label>
-            ))}
-            <button className="text-blue-600 font-medium mt-1">+ more</button>
-          </div>
-        )}
-      </div>
-
-      {/* Price Section */}
-      <div className="border-t border-gray-200 py-4">
-        <div className="flex items-center justify-between cursor-pointer" onClick={() => toggleSection("price")}>
           <h3 className="text-lg font-medium">Price</h3>
           <ChevronDown
             className={`h-5 w-5 text-gray-500 transform transition-transform ${
@@ -159,71 +211,22 @@ export default function Filter() {
         </div>
         {expandedSections.price && (
           <div className="mt-4">
-            <Slider value={priceRange} onValueChange={handleSliderChange} max={maxPrice} step={1000} />
+            <Slider
+              value={priceRange}
+              onValueChange={handleSliderChange}
+              max={maxPrice}
+              step={1000}
+            />
             <div className="flex justify-between mt-6">
               <div>
                 <p className="text-gray-500 text-sm">Min</p>
-                <p className="font-medium">Rs. {priceRange[0].toLocaleString()}</p>
+                <p className="font-medium">₹{priceRange[0].toLocaleString()}</p>
               </div>
               <div className="text-right">
                 <p className="text-gray-500 text-sm">Max</p>
-                <p className="font-medium">Rs. {priceRange[1].toLocaleString()}</p>
+                <p className="font-medium">₹{priceRange[1].toLocaleString()}</p>
               </div>
             </div>
-          </div>
-        )}
-      </div>
-
-      {/* Brands Section */}
-      <div className="border-t border-gray-200 py-4">
-        <div className="flex items-center justify-between cursor-pointer" onClick={() => toggleSection("brands")}>
-          <h3 className="text-lg font-medium">Brands</h3>
-          <ChevronDown
-            className={`h-5 w-5 text-gray-500 transform transition-transform ${
-              expandedSections.brands ? "rotate-180" : ""
-            }`}
-          />
-        </div>
-        {expandedSections.brands && (
-          <div className="mt-4 space-y-2">
-            {Object.entries(brands).map(([brand, checked]) => (
-              <label key={brand} className="flex items-center">
-                <input
-                  type="checkbox"
-                  className="h-4 w-4 rounded border-gray-300 text-blue-600"
-                  checked={checked}
-                  onChange={() => handleBrandChange(brand)}
-                />
-                <span className="ml-2 capitalize">{brand}</span>
-              </label>
-            ))}
-          </div>
-        )}
-      </div>
-
-      {/* More Filters Section */}
-      <div className="border-t border-gray-200 py-4">
-        <div className="flex items-center justify-between cursor-pointer" onClick={() => toggleSection("moreFilters")}>
-          <h3 className="text-lg font-medium">More Filters</h3>
-          <ChevronDown
-            className={`h-5 w-5 text-gray-500 transform transition-transform ${
-              expandedSections.moreFilters ? "rotate-180" : ""
-            }`}
-          />
-        </div>
-        {expandedSections.moreFilters && (
-          <div className="mt-4 space-y-2">
-            {Object.entries(moreFilters).map(([filter, checked]) => (
-              <label key={filter} className="flex items-center">
-                <input
-                  type="checkbox"
-                  className="h-4 w-4 rounded border-gray-300 text-blue-600"
-                  checked={checked}
-                  onChange={() => handleMoreFilterChange(filter)}
-                />
-                <span className="ml-2 capitalize">{filter.replace(/([A-Z])/g, " $1")}</span>
-              </label>
-            ))}
           </div>
         )}
       </div>

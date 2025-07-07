@@ -26,40 +26,39 @@ const Card = () => {
   return (
     <div className="px-4 sm:px-10 md:px-20 py-10">
       {/* Heading */}
-      <div className="mb-8 text-start">
-        <h2 className="text-3xl sm:text-4xl font-bold">Choose best,</h2>
-        <h2 className="text-3xl sm:text-4xl font-bold">See what’s new!</h2>
+      <div className="mb-8">
+        <h2 className="text-3xl sm:text-4xl font-semibold">Choose best,</h2>
+        <h2 className="text-3xl sm:text-4xl font-semibold">See what’s new!</h2>
       </div>
 
       {/* Card List */}
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 justify-items-center px-4">
-  {cards.map((card, index) => (
-    <div
-      key={index}
-      className="relative w-full max-w-[350px] h-[400px] rounded-xl overflow-hidden shadow-md group"
-    >
-      {/* Image */}
-      <Image
-        src={card.src}
-        alt={`card-${index}`}
-        fill
-        className="object-cover group-hover:scale-105 transition duration-300"
-      />
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 justify-items-center">
+        {cards.map((card, index) => (
+          <div
+            key={index}
+            className="relative w-full max-w-[350px] h-[400px] rounded-xl overflow-hidden shadow-md group"
+          >
+            {/* Image */}
+            <Image
+              src={card.src}
+              alt={`card-${index}`}
+              fill
+              className="object-cover group-hover:scale-105 transition duration-300"
+            />
 
-      {/* Overlay */}
-      <div className="absolute inset-0 p-5 flex flex-col justify-end bg-black/0">
-        <p className="text-sm text-black mb-1">{card.description}</p>
-        <h3 className="text-lg sm:text-xl font-semibold text-black mb-2">
-          {card.title}
-        </h3>
-        <button className="text-black text-start py-2 rounded-full text-sm font-medium hover:bg-gray-200 transition">
-          {card.buynow}
-        </button>
+            {/* Overlay */}
+            <div className="absolute inset-0 p-5 flex flex-col justify-end bg-black/0">
+              <p className="text-sm text-black mb-1">{card.description}</p>
+              <h3 className="text-lg sm:text-xl font-semibold text-black mb-2">
+                {card.title}
+              </h3>
+              <button className="text-black text-start py-2 rounded-full text-sm font-medium hover:bg-gray-200 transition">
+                {card.buynow}
+              </button>
+            </div>
+          </div>
+        ))}
       </div>
-    </div>
-  ))}
-</div>
-
     </div>
   );
 };

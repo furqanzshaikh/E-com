@@ -45,7 +45,7 @@ export default function BuildPc() {
                 <div className="relative group cursor-pointer">
                   <div className="relative overflow-hidden rounded-2xl">
                     {/* Bullet hole on image */}
-                    <div className="absolute bottom-[-15px] right-[-15px] w-[60px] h-[60px] bg-white rounded-full z-10 flex items-center justify-center shadow-md">
+                    <div className="absolute bottom-[-5px] right-[-5px] w-[60px] h-[60px] bg-white rounded-full z-10 flex items-center justify-center ">
                       <ArrowUpRight className="w-5 h-5 text-black" />
                     </div>
 
